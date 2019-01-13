@@ -1,0 +1,2 @@
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_names --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/person_names.json
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_surnames --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/person_surnames.json

@@ -13,6 +13,6 @@ class TestDBConfig(unittest.TestCase):
         print("DB Port is {port:d}".format(port=ConfV.port))
 
     def test_name(self):
-        self.assertTrue(hasattr(ConfV, 'database'), msg="DB Name is not defined")
-        print("DB Name is {name:s}".format(name=ConfV.database))
+        self.assertTrue(hasattr(ConfV, 'env_database'), msg="DB Name is not defined")
+        print("DB Name is {name:s}".format(name=ConfV.env_database))
 
