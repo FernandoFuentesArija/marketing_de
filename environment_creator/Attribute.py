@@ -1,4 +1,6 @@
 from environment_creator.config import ConfigVariablesEnv
+from common_tools.logger import log
+from common_tools.config import ConfigCommonVariables
 import random
 
 class Attribute:
@@ -80,6 +82,12 @@ class Attribute:
         elif this_generation == ConfigVariablesEnv.num_gen_random:
             ret_list = self.create_random_numbers(dec_pre, min_rang, max_rang, list_length)
             return ret_list
+        else:
+            log_message1 = 'Permitted types, <' + ConfigVariablesEnv.num_gen_seq + '> or <' \
+                           + ConfigVariablesEnv.num_gen_random + '>.'
+            log_message = 'Type of generation <' + this_generation + '> not allowed for number. ' + log_message1
+            log_object = 'Attribute.create_numbers()'
+            log(ConfigCommonVariables.level_error, log_message, log_object)
 
 
     def create_random_numbers(self,decimal_prec,min_num, max_num, list_length):
@@ -114,9 +122,15 @@ class Attribute:
         # We use range
         new_range = range(min_num,max_num,hop)
         new_range_list = list(new_range)
-        # Validation
-        if len(new_range_list) != list_length:
-            print("error")
+        # Validation of the size
+        new_range_list_len = len(new_range_list)
+        if new_range_list_len != list_length:
+            log_message1 = "The list of sequential numbers from " + str(min_num) + " to " + str(max_num) + " with "
+            log_message2 ="hop " + str(hop) + " has length " + str(new_range_list_len) + " when the size is established"
+            log_message3 =" to " + str (list_length) + '.'
+            log_message = log_message1 + log_message2 + log_message3
+            log_object = 'Attribute.create_seq_numbers()'
+            log(ConfigCommonVariables.level_error, log_message, log_object)
         # Finish
         return new_range_list
 
@@ -143,7 +157,7 @@ class Attribute:
             if list_len == self.att_num:
                 has_duplicates = False
             else:
-                # If we eliminate duplicates we need to ask for more elements to add to the list
+                # If we have eliminated duplicates we need to ask for more elements to add to the list
                 num_required = self.att_num - list_len
         # return the list with unique elements
         return ret_unique_list
@@ -170,4 +184,9 @@ class Attribute:
         elif this_type == ConfigVariablesEnv.att_type_conditioned:
             pass
         else:
-            print("error")
+            log_message1 = 'Permitted types: ' + ConfigVariablesEnv.att_type_number + ', ' \
+                + ConfigVariablesEnv.att_type_text + ', ' + ConfigVariablesEnv.att_type_date + ', '\
+                + ConfigVariablesEnv.att_type_combined + ' and ' + ConfigVariablesEnv.att_type_conditioned + '.'
+            log_message = 'Type of attribute <' + this_type + '> not allowed. ' + log_message1
+            log_object = 'Attribute.create_attribute()'
+            log(ConfigCommonVariables.level_error, log_message, log_object)
