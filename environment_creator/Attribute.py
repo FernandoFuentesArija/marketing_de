@@ -88,6 +88,7 @@ class Attribute:
         :param min_num: Minimun number allowed
         :param max_num: Maximun number allowed
         :param list_length: number of numbers to generate and return in a list
+        :return: list of random numbers generated
         """
         # The list to return
         ret_list = []
@@ -108,6 +109,7 @@ class Attribute:
         :param min_num: Minimun number allowed
         :param max_num: Maximun number allowed
         :param list_length: number of numbers to generate and return in a list
+        :return: list of sequential numbers generated
         """
         # We use range
         new_range = range(min_num,max_num,hop)
@@ -118,6 +120,33 @@ class Attribute:
         # Finish
         return new_range_list
 
+    def create_unique_list(self,func):
+        """ This function is going to ensure that the attribute list returned has no duplicates
+        :param func: function that is going to generate the list
+        :return: list of elements without duplicates
+        """
+        # Vars
+        ret_unique_list = []
+        num_required = self.att_num
+        # We start from the premise that we can find duplicates
+        has_duplicates = True
+        while has_duplicates:
+            # we use the past function as argument to generate the list
+            this_list = func(num_required)
+            # join the returned list with the final list
+            ret_unique_list = ret_unique_list + this_list
+            # eliminate duplicates
+            set_no_dup = set(ret_unique_list)
+            ret_unique_list = list(set_no_dup)
+            # validate the length after removing duplicates
+            list_len = len(ret_unique_list)
+            if list_len == self.att_num:
+                has_duplicates = False
+            else:
+                # If we eliminate duplicates we need to ask for more elements to add to the list
+                num_required = self.att_num - list_len
+        # return the list with unique elements
+        return ret_unique_list
 
     def create_attribute(self, att_dic, att_num):
         """ This is the single entry point to create a list of attributes

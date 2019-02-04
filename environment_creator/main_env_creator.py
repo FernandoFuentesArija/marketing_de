@@ -1,6 +1,7 @@
 from environment_creator.Attribute import Attribute
 from bbdd_manager.Mongo_manager import Mongo_manager
 from bbdd_manager import ConfigVariablesBbdd
+import random
 
 # Creamos una conexion a la BBDD
 bbdd_connec = Mongo_manager(ConfigVariablesBbdd.env_database)
@@ -42,6 +43,23 @@ result_list2 = att_1.create_attribute(att_desc2,att_num2)
 print("Imprimimos lista de numeros secuenciales")
 print(result_list2)
 
+
+# Case 3 - numeros unique
+def gen_list(num):
+    ret_gen_list = []
+    this_num = 0
+    for i in range(num):
+        this_num = random.randint(0,9)
+        ret_gen_list.append(this_num)
+    ret_gen_list.append(this_num)
+    ret_gen_list.pop(0)
+    print(ret_gen_list)
+    return ret_gen_list
+
+att_1.att_num = 5
+result_list3 = att_1.create_unique_list(gen_list)
+print("Imprimimos lista de numeros sin repeticiones")
+print(result_list3)
 
 
 
