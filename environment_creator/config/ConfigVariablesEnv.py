@@ -5,6 +5,7 @@ object_name = 'OBJ_NAME'
 attribute_name = 'ATT_NAME'
 attribute_constr = 'ATT_CONSTR'
 attribute_type = 'ATT_TYPE'
+attribute_unique = 'UNIQUE'
 #####################
 ## Attribute types ##
 #####################

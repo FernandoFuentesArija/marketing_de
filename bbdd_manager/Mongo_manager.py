@@ -109,3 +109,20 @@ class Mongo_manager:
             lista_res = [resultado.acknowledged, None, None]
         return lista_res
 
+    def pick_random_docs(self,coleccion, total_number):
+        """Function to retrieve a random number of documents from a collection.
+
+        Accepts two parameters:
+           <colection>: Collection from which the documents are going to be extracted
+           <total_number>: Number of documents to be obtained randomly
+        And returns a cursor, the document can be extracted with cursor.next(), or a for.
+        """
+        requested_number = total_number
+        doc_cursor = self.db[coleccion].aggregate([{ "$sample": { "size": requested_number } }])
+        return doc_cursor
+
+# Creamos una conexion a la BBDD
+bbdd_connec = Mongo_manager(ConfigVariablesBbdd.env_database)
+cur = bbdd_connec.pick_random_docs('data_person_names_sample',1)
+for doc in cur:
+    print(doc)

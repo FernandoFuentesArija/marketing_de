@@ -25,11 +25,15 @@ class Attribute:
     - self.att_dic: Dictionary with the recipe to create the attribute
     - self.att_num: Number of attributes to create (inside a list)
 
-    METHODS
-    -------
-    - create_attribute
+    PUBLIC METHODS
+    ---------------
+    - create_attribute: This is the single entry point to create a list of attributes.
+
+    PRIVATE METHODS
+    ---------------
     - create_numbers
     - create_random_numbers
+    - create_seq_numbers
 
     PERSISTENCE
     ------------
@@ -47,6 +51,9 @@ class Attribute:
         """
         self.bbdd = ddbb_conn
 
+    ####################
+    ## NUMBER METHODS ##
+    ####################
 
     def create_numbers(self,list_length):
         """ This function creates a list of numbers
@@ -132,6 +139,39 @@ class Attribute:
         # Finish
         return new_range_list
 
+    ####################
+    ##  TEXT METHODS  ##
+    ####################
+
+    def create_text(self,list_length):
+        """ This function creates a list of texts
+        The dictionary that will describe how to generate the list of numbers will have the following keys
+        - 'LENGTH': Will describe the length of the text (only use for 'GENERATION':'RANDOM').
+           Ej: if we want a text of 10 Characters max  Ej_dic: 'LENGTH':'10'
+        - 'GENERATION': It describes how the text are going to be created. We have 3 options:
+           - BBDD: We take the text from a populated BBDD.
+           - RANDOM: We generate a random text.
+           - CTE: We use a constant.
+           Ej_dic: 'GENERATION':'BBDD' or 'GENERATION':'RANDOM' or 'GENERATION':'CTE'
+        - 'BBDD_NAME': If 'GENERATION':'BBDD' we need to inform this key with the name of the BBDD.
+           Ej: if the BBDD name is environmentBBDD  Ej_dic: 'BBDD_NAME':'environmentBBDD'
+        - 'BBDD_SOURCE': If 'GENERATION':'BBDD' we need to inform source where we have to search for the field. In a
+           relation database will be the table in a document database will be collections.
+           Ej: if the BBDD collection is data_person_names  Ej_dic: 'BBDD_SOURCE':'data_person_names'
+        - 'BBDD_FIELD': If 'GENERATION':'BBDD' we need to inform which field to pick as the text. In a
+           relation database will be the column name in a document database will be key name.
+           Ej: if the BBDD key is name  Ej_dic: 'BBDD_FIELD':'name'
+        - 'CTE_STR': If 'GENERATION':'CTE' we need to inform which constant we are going to use
+           Ej: if we want to put 'Hello world'  Ej_dic: 'CTE_STR':'Hello world'
+        :param list_length: number of numbers to generate and return in a list
+        :return: list of numbers generated
+        """
+        pass
+
+    ####################
+    ## UNIQUE FEATURE ##
+    ####################
+
     def create_unique_list(self,func):
         """ This function is going to ensure that the attribute list returned has no duplicates
         :param func: function that is going to generate the list
@@ -160,6 +200,10 @@ class Attribute:
         # return the list with unique elements
         return ret_unique_list
 
+    ####################
+    ##  ENTRY  POINT  ##
+    ####################
+
     def create_attribute(self, att_dic, att_num):
         """ This is the single entry point to create a list of attributes
         :param att_dic: Dictionary with the recipe to create the attribute
@@ -169,9 +213,14 @@ class Attribute:
         self.att_num = att_num
         # We obtain the type of attribute to decide how to process it
         this_type = att_dic[ConfigVariablesEnv.attribute_type]
+        # We obtain the type of constraint (UNIQUE)
+        this_const = att_dic[ConfigVariablesEnv.attribute_constr]
         # Now depending on the type we call the specific creation method
         if this_type == ConfigVariablesEnv.att_type_number:
-            ret_list = self.create_numbers(self.att_num)
+            if this_const == ConfigVariablesEnv.attribute_unique:
+                ret_list = self.create_unique_list(self.create_numbers)
+            else:
+                ret_list = self.create_numbers(self.att_num)
             return ret_list
         elif this_type == ConfigVariablesEnv.att_type_text:
             pass
