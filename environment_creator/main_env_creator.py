@@ -103,5 +103,5 @@ att_desc6 = {
     'HOP':'2'
 }
 att_num6 = 5
-print("fallo del create_numbers por generacion secuencial incorrecta")
-result_list2 = att_1.create_attribute(att_desc6,att_num6)
+#print("fallo del create_numbers por generacion secuencial incorrecta")
+#result_list2 = att_1.create_attribute(att_desc6,att_num6)
