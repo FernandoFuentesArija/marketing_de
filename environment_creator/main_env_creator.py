@@ -105,3 +105,17 @@ att_desc6 = {
 att_num6 = 5
 #print("fallo del create_numbers por generacion secuencial incorrecta")
 #result_list2 = att_1.create_attribute(att_desc6,att_num6)
+
+# Case 7 - numeros secuenciales
+att_desc7 = {
+    'OBJ_NAME':'person',
+    'ATT_NAME':'text_code',
+    'ATT_CONSTR':'NON_UNIQUE',
+    'ATT_TYPE':'TEXT',
+    'GENERATION':'RANDOM',
+    'LENGTH':'5'
+}
+att_num7 = 4
+result_list7 = att_1.create_attribute(att_desc7,att_num7)
+print("Imprimimos lista de texto aleatorio")
+print(result_list7)

@@ -3,6 +3,7 @@ from common_tools.logger import log
 from common_tools.config import ConfigCommonVariables
 from common_tools.config import ConfigErrorMessages
 import random
+import string
 
 class Attribute:
     """ Base class to manage attributes
@@ -166,7 +167,29 @@ class Attribute:
         :param list_length: number of numbers to generate and return in a list
         :return: list of numbers generated
         """
-        pass
+        # First we obtain the generation
+        this_generation = self.att_dic[ConfigVariablesEnv.txt_generation]
+        # Depending on the type of generation
+        if this_generation == ConfigVariablesEnv.txt_gen_random:
+            # We obtain the length desired
+            str_txt_length = self.att_dic[ConfigVariablesEnv.txt_length]
+            int_txt_length = int(str_txt_length)
+            # We call the specific function
+            ret_txt_list = self.create_random_txt(list_length, int_txt_length)
+            return ret_txt_list
+
+
+    def create_random_txt(self, list_length, txt_length):
+        """ This function will create and return a list of sequence integer numbers
+        :param decimal_prec: Number of digits for the decimal part
+        :return: list of sequential texts generated
+        """
+        ret_rand_txt_list = []
+        for i in range(list_length):
+            ran_str = ''.join(random.choice(string.ascii_letters) for m in range(txt_length))
+            ret_rand_txt_list.append(ran_str)
+        return ret_rand_txt_list
+
 
     ####################
     ## UNIQUE FEATURE ##
@@ -223,7 +246,8 @@ class Attribute:
                 ret_list = self.create_numbers(self.att_num)
             return ret_list
         elif this_type == ConfigVariablesEnv.att_type_text:
-            pass
+            ret_list = self.create_text(self.att_num)
+            return ret_list
         elif this_type == ConfigVariablesEnv.att_type_date:
             pass
         elif this_type == ConfigVariablesEnv.att_type_combined:

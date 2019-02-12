@@ -23,3 +23,15 @@ num_generation = 'GENERATION'
 num_gen_random = 'RANDOM'
 num_gen_seq = 'SEQUENTIAL'
 num_hop = 'HOP'
+################################
+## Attribute text variables ##
+################################
+txt_generation = 'GENERATION'
+txt_gen_bbdd = 'BBDD'
+txt_gen_random = 'RANDOM'
+txt_gen_cte = 'CTE'
+txt_bbdd_name = 'BBDD_NAME'
+txt_bbdd_source = 'BBDD_SOURCE'
+txt_bbdd_field = 'BBDD_FIELD'
+txt_length = 'LENGTH'
+txt_cte = 'CTE_STR'
