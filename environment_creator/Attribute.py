@@ -4,6 +4,7 @@ from common_tools.config import ConfigCommonVariables
 from common_tools.config import ConfigErrorMessages
 import random
 import string
+from datetime import date
 
 class Attribute:
     """ Base class to manage attributes
@@ -162,7 +163,7 @@ class Attribute:
            Ej: if the BBDD key is name  Ej_dic: 'BBDD_FIELD':'name'
         - 'CTE_STR': If 'GENERATION':'CTE' we need to inform which constant we are going to use
            Ej: if we want to put 'Hello world'  Ej_dic: 'CTE_STR':'Hello world'
-        :param list_length: number of numbers to generate and return in a list
+        :param list_length: number of texts to generate and return in a list
         :return: list of numbers generated
         """
         # First we obtain the generation
@@ -246,6 +247,76 @@ class Attribute:
         return ret_rand_txt_list
 
     ####################
+    ##  DATE METHODS  ##
+    ####################
+
+    def create_date(self,list_length):
+        """ This function creates a list of dates
+        The dictionary that will describe how to generate the list of numbers will have the following keys
+        - 'GENERATION': It describes how the dates are going to be created. We have 2 options:
+           - RANDOM: We generate a random date between two established values.
+           - CTE: We use a constant date.
+           Ej_dic: 'GENERATION':'RANDOM' or 'GENERATION':'CTE'
+        - 'MIN_DATE': If 'GENERATION':'RANDOM' we need to inform the minimal date we can choose.
+           Ej: if the lower limit is 1984-10-20  Ej_dic: 'MIN_DATE':'1984-10-20'
+        - 'MAX_DATE': If 'GENERATION':'RANDOM' we need to inform the maximal date we can choose.
+           Ej: if the upper limit is 2015-09-15  Ej_dic: 'MAX_DATE':'2015-09-15'
+        - 'CTE_DATE': If 'GENERATION':'CTE' we need to inform which constant date are we going to use
+           Ej: if we want to put '1956-03-25'  Ej_dic: 'CTE_DATE':'1956-03-25'
+        :param list_length: number of dates to generate and return in a list
+        :return: list of dates generated
+        """
+        # First we obtain the generation
+        this_generation = self.att_dic[ConfigVariablesEnv.date_generation]
+        # Depending on the type of generation we choose the specific function
+        if this_generation == ConfigVariablesEnv.date_gen_random:
+            # We obtain the length desired
+            str_date_min = self.att_dic[ConfigVariablesEnv.date_min]
+            str_date_max = self.att_dic[ConfigVariablesEnv.date_max]
+            # We call the specific function
+            ret_txt_list = self.create_random_date(list_length, str_date_min, str_date_max)
+            return ret_txt_list
+        elif this_generation == ConfigVariablesEnv.date_gen_cte:
+            # We obtain the constant to use
+            cte_date = self.att_dic[ConfigVariablesEnv.date_cte]
+            # We call the specific function
+            ret_txt_list = self.create_cte_date(list_length, cte_date)
+            return ret_txt_list
+        else:
+            list_var_message = [ConfigErrorMessages.ErrorCode004, this_generation, ConfigVariablesEnv.date_gen_random,
+                                ConfigVariablesEnv.date_gen_cte]
+            log_object = 'Attribute.create_date()'
+            log(ConfigCommonVariables.level_error, list_var_message, log_object)
+
+    def create_cte_date(self, list_length, cte_date):
+        """ This function will create and return constant date list
+        :param list_length: Length of the list to return
+        :return: list of sequential texts generated
+        """
+        ret_rand_date_list = []
+        cte_year, cte_month, cte_day = cte_date.split('-')
+        for i in range(list_length):
+            ret_rand_date_list.append(date(int(cte_year), int(cte_month), int(cte_day)))
+        return ret_rand_date_list
+
+    def create_random_date(self, list_length, min_date, max_date):
+        """ This function will create and return random date list
+        :param list_length: Length of the list to return
+        :return: list of random dates generated
+        """
+        ret_rand_date_list = []
+        format = '%Y-%m-%d'
+        min_year, min_month, min_day = min_date.split('-')
+        max_year, max_month, max_day = max_date.split('-')
+        sdate = date(int(min_year), int(min_month), int(min_day))
+        edate = date(int(max_year), int(max_month), int(max_day))
+        for i in range(list_length):
+            seed = random.random()
+            ptime = sdate + seed * (edate - sdate)
+            ret_rand_date_list.append(ptime)
+        return ret_rand_date_list
+
+    ####################
     ## UNIQUE FEATURE ##
     ####################
 
@@ -300,10 +371,17 @@ class Attribute:
                 ret_list = self.create_numbers(self.att_num)
             return ret_list
         elif this_type == ConfigVariablesEnv.att_type_text:
-            ret_list = self.create_text(self.att_num)
+            if this_const == ConfigVariablesEnv.attribute_unique:
+                ret_list = self.create_unique_list(self.create_text)
+            else:
+                ret_list = self.create_text(self.att_num)
             return ret_list
         elif this_type == ConfigVariablesEnv.att_type_date:
-            pass
+            if this_const == ConfigVariablesEnv.attribute_unique:
+                ret_list = self.create_unique_list(self.create_date)
+            else:
+                ret_list = self.create_date(self.att_num)
+            return ret_list
         elif this_type == ConfigVariablesEnv.att_type_combined:
             pass # Not done yet
         elif this_type == ConfigVariablesEnv.att_type_conditioned:

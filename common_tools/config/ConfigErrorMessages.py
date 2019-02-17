@@ -13,6 +13,9 @@ E003 = 'Type of attribute <$1> not allowed. Permitted types: $2, $3, $4, $5 and 
 # Error in Attribute.create_text()
 ErrorCode004 = 'E004'
 E004 = 'Type of generation <$1> not allowed for text. Permitted types, <$2>, <$3> or <$4>.'
+# Error in Attribute.create_date()
+ErrorCode005 = 'E005'
+E005 = 'Type of generation <$1> not allowed for text. Permitted types, <$2> or <$3>.'
 
 
 

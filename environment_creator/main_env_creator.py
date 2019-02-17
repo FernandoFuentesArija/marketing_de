@@ -148,3 +148,32 @@ att_num9 = 6
 result_list9 = att_1.create_attribute(att_desc9,att_num9)
 print("Imprimimos lista de texto desde una bbdd")
 print(result_list9)
+
+# Case 10 - texto de bbdd
+att_desc10 = {
+    'OBJ_NAME':'person',
+    'ATT_NAME':'text_code',
+    'ATT_CONSTR':'NON_UNIQUE',
+    'ATT_TYPE':'DATE',
+    'GENERATION':'CTE',
+    'CTE_DATE':'2019-08-15'
+}
+att_num10 = 6
+result_list10 = att_1.create_attribute(att_desc10,att_num10)
+print("Imprimimos lista de fechas constantes")
+print(result_list10)
+
+# Case 10 - texto de bbdd
+att_desc11 = {
+    'OBJ_NAME':'person',
+    'ATT_NAME':'text_code',
+    'ATT_CONSTR':'NON_UNIQUE',
+    'ATT_TYPE':'DATE',
+    'GENERATION':'RANDOM',
+    'MIN_DATE':'1960-01-01',
+    'MAX_DATE':'2000-01-01'
+}
+att_num11 = 6
+result_list11 = att_1.create_attribute(att_desc11,att_num11)
+print("Imprimimos lista de fechas aleatorias")
+print(result_list11)

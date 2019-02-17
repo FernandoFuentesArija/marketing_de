@@ -34,3 +34,12 @@ txt_bbdd_source = 'BBDD_SOURCE'
 txt_bbdd_field = 'BBDD_FIELD'
 txt_length = 'LENGTH'
 txt_cte = 'CTE_STR'
+##############################
+## Attribute date variables ##
+##############################
+date_generation = 'GENERATION'
+date_gen_random = 'RANDOM'
+date_gen_cte = 'CTE'
+date_min = 'MIN_DATE'
+date_max = 'MAX_DATE'
+date_cte = 'CTE_DATE'
