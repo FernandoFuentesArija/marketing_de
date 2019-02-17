@@ -106,7 +106,7 @@ att_num6 = 5
 #print("fallo del create_numbers por generacion secuencial incorrecta")
 #result_list2 = att_1.create_attribute(att_desc6,att_num6)
 
-# Case 7 - numeros secuenciales
+# Case 7 - texto aleatorio
 att_desc7 = {
     'OBJ_NAME':'person',
     'ATT_NAME':'text_code',
@@ -119,3 +119,32 @@ att_num7 = 4
 result_list7 = att_1.create_attribute(att_desc7,att_num7)
 print("Imprimimos lista de texto aleatorio")
 print(result_list7)
+
+# Case 8 - texto cte
+att_desc8 = {
+    'OBJ_NAME':'person',
+    'ATT_NAME':'text_code',
+    'ATT_CONSTR':'NON_UNIQUE',
+    'ATT_TYPE':'TEXT',
+    'GENERATION':'CTE',
+    'CTE_STR':'Hola Mundo'
+}
+att_num8 = 5
+result_list8 = att_1.create_attribute(att_desc8,att_num8)
+print("Imprimimos lista de texto constante")
+print(result_list8)
+
+# Case 9 - texto de bbdd
+att_desc9 = {
+    'OBJ_NAME':'person',
+    'ATT_NAME':'text_code',
+    'ATT_CONSTR':'NON_UNIQUE',
+    'ATT_TYPE':'TEXT',
+    'GENERATION':'BBDD',
+    'BBDD_SOURCE':'data_person_names_sample',
+    'BBDD_FIELD':'name'
+}
+att_num9 = 6
+result_list9 = att_1.create_attribute(att_desc9,att_num9)
+print("Imprimimos lista de texto desde una bbdd")
+print(result_list9)
