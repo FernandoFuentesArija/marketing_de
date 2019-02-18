@@ -1,5 +1,7 @@
 C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection data_person_names --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_names.json
 C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection data_person_surnames --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_surnames.json
-C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection data_person_names_sample --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_names_sample.json
+C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection data_person_gender --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_gender.json
+C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection data_person_city --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_city.json
 C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection conf_objects --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\person_obj_conf.json
 C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection test --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\test.json
+C:\MongoDB\Server\3.4\bin\mongoimport --db environmentBBDD --collection PERSON --drop --file C:\FERNANDO\MasterDS\Proyecto\marketing_de\bbdd_manager\mongoImports\PERSON.json
