@@ -43,3 +43,8 @@ date_gen_cte = 'CTE'
 date_min = 'MIN_DATE'
 date_max = 'MAX_DATE'
 date_cte = 'CTE_DATE'
+date_adjustment = 'T00:00:00Z'
+##############################
+##     Object variables     ##
+##############################
+ojb_conf_coll = 'conf_objects'

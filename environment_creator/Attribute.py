@@ -48,7 +48,7 @@ class Attribute:
 
     # Le pasamos una conexion a cada instancia (puede ser la misma)
     def __init__(self, ddbb_conn):
-        """ For every instance we need 3 parameters
+        """ For every instance we need 1 parameter
         :param ddbb_conn: Object that represents the connection to the bbdd
         """
         self.bbdd = ddbb_conn
@@ -305,7 +305,6 @@ class Attribute:
         :return: list of random dates generated
         """
         ret_rand_date_list = []
-        format = '%Y-%m-%d'
         min_year, min_month, min_day = min_date.split('-')
         max_year, max_month, max_day = max_date.split('-')
         sdate = date(int(min_year), int(min_month), int(min_day))

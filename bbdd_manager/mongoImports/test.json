@@ -1,0 +1,6 @@
+{"name": "Jeff Johnson", "email": "jeff@gmail.com", "phone": "5555555555", "date_added": { "$date": "2014-01-22T00:00:00Z" }}
+{"ID_DOC":"BnSQAFhB","NAME":"Camelia","BORN_DATE":{ "$date":"1966-06-24T00:00:00Z"},"WEIGHT":114.6,"HEIGHT":176.0,"SURNAME1":"Guiza","SURNAME2":"Compean"}
+{"ID_DOC":"ONQCHWjw","NAME":"Nepomuceno","BORN_DATE":{ "$date":"1975-02-09T00:00:00Z"},"WEIGHT":85.63,"HEIGHT":134.0,"SURNAME1":"Jauri","SURNAME2":"Ballin"}
+{"ID_DOC":"zGURUbKm","NAME":"Nevin","BORN_DATE":{ "$date":"1975-06-07T00:00:00Z"},"WEIGHT":102.53,"HEIGHT":163.0,"SURNAME1":"Nieva","SURNAME2":"Elizondo"}
+{"ID_DOC":"XSwkUSNh","NAME":"Sinamelia","BORN_DATE":{ "$date":"1965-01-21T00:00:00Z"},"WEIGHT":119.55,"HEIGHT":135.0,"SURNAME1":"Sepulbeda","SURNAME2":"Ygnacio"}
+{"ID_DOC":"itmIENEn","NAME":"Makoto","BORN_DATE":{ "$date":"1972-07-23T00:00:00Z"},"WEIGHT":111.7,"HEIGHT":178.0,"SURNAME1":"Hererra","SURNAME2":"Gado"}
