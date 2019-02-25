@@ -1,0 +1,2 @@
+{"_id:": 1, "AE_NAME": "PRODUCT", "AE_LIST_ATT": ["PRODUCT_NAME","PRICE"], "AE_SOURCE": "env_products"}
+{"_id:": 2, "AE_NAME": "PLATFORM", "AE_LIST_ATT": ["PLATFORM_NAME"], "AE_SOURCE": "env_platforms"}

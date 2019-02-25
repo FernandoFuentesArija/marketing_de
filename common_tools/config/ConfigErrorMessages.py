@@ -1,6 +1,6 @@
-#################
-## Error codes ##
-#################
+#####################################
+## Error codes for Attribute class ##
+#####################################
 # Error in Attribute.create_numbers()
 ErrorCode001 = 'E001'
 E001 = 'Type of generation <$1> not allowed for number. Permitted types, <$2> or <$3>.'
@@ -16,6 +16,11 @@ E004 = 'Type of generation <$1> not allowed for text. Permitted types, <$2>, <$3
 # Error in Attribute.create_date()
 ErrorCode005 = 'E005'
 E005 = 'Type of generation <$1> not allowed for text. Permitted types, <$2> or <$3>.'
-
+#######################################
+## Error codes for Interaction class ##
+#######################################
+# Error in Interaction.set_interaction()
+ErrorCode006 = 'E006'
+E006 = 'Name of iteration <$1> not found in the source <$2>.'
 
 
