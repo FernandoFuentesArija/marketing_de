@@ -112,3 +112,9 @@ class Interaction:
             list_var_message = [ConfigErrorMessages.ErrorCode006, interaction_name, ConfEnvManager.interaction_coll]
             log_object = 'Iteration.set_interaction()'
             log(ConfigCommonVariables.level_error, list_var_message, log_object)
+
+    def get_type(self):
+        """ This function return the interaction type.
+        :return: self.int_type
+        """
+        return self.int_type

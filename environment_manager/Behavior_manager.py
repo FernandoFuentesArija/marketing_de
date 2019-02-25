@@ -1,5 +1,5 @@
 from environment_manager.Interaction import Interaction
-
+from environment_manager.config import ConfEnvManager
 
 class Behavior_manager:
     """ Base class to manage the behavior of the objects loaded in the environment
@@ -39,8 +39,8 @@ class Behavior_manager:
 
     def action_behavior_manager(self, interaction_input_name, interaction_output_name):
         """ This function will model the response of the environment to actions
-        :param interaction_input: Name of the interaction that is use to receive the action.
-        :param interaction_output: Name of the interaction that is use to send the response to the action.
+        :param interaction_input_name: Name of the interaction that is use to receive the action.
+        :param interaction_output_name: Name of the interaction that is use to send the response to the action.
         :return: None
         """
         # First we create to interaction objects, one for the input the other for the output
@@ -48,4 +48,9 @@ class Behavior_manager:
         interaction_input_obj.set_interaction(interaction_input_name)
         interaction_output_obj = Interaction(self.bbdd)
         interaction_output_obj.set_interaction(interaction_output_name)
-        # Now we are going to see if we have a file to read
+        # Now we are going to see the type of interaction selected (only file right now)
+        type_of_inter = interaction_input_obj.get_type()
+        if type_of_inter == ConfEnvManager.file_comm:
+            pass # file_action_behavior_manager()
+        else: # Configure more types in the future
+            pass
