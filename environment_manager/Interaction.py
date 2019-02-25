@@ -118,3 +118,15 @@ class Interaction:
         :return: self.int_type
         """
         return self.int_type
+
+    def get_commtype(self):
+        """ This function return the interaction communication type.
+        :return: self.int_comm_type
+        """
+        return self.int_comm_type
+
+    def get_path(self):
+        """ This function return the path were the input/output is expected.
+        :return: self.int_comm_loc
+        """
+        return self.int_comm_loc
