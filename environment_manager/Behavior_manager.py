@@ -66,4 +66,8 @@ class Behavior_manager:
         input_rel_path = interaction_input_obj.get_path()
         # Obtain list of files in input directory
         file_list = os.listdir(input_rel_path)
-        print("lista dir: ", file_list)
+        # We search for the files configured
+        file_ext = interaction_input_obj.get_commext()
+        for file in file_list:
+            if file_ext in file:
+                print("Bingo")

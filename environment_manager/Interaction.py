@@ -130,3 +130,15 @@ class Interaction:
         :return: self.int_comm_loc
         """
         return self.int_comm_loc
+
+    def get_commform(self):
+        """ This function return the interaction communication format.
+        :return: self.int_comm_format
+        """
+        return self.int_comm_format
+
+    def get_commext(self):
+        """ This function return the interaction communication file extension.
+        :return: self.int_comm_ext
+        """
+        return self.int_comm_ext
