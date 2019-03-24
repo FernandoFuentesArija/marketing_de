@@ -16,9 +16,15 @@ int_comm_ext = "communication_ext"
 int_comm_loc = "communication_location"
 input_int_obj_name = "obj_name"
 input_int_obj_id = "obj_id"
+input_int_obj_source = "obj_source"
 input_int_act_name = "ACT_NAME"
 input_int_inter_capacity = "INTER_CAPACITY"
 #--
 #-- Communication Variables
 #--
 file_comm = "FILE"
+###########################
+##    Action variables   ##
+###########################
+action_elemen_1 = "PRODUCT"
+action_elemen_2 = "PLATFORM"

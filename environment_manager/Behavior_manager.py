@@ -1,6 +1,7 @@
 from environment_manager.Interaction import Interaction
 from environment_manager.config import ConfEnvManager
 import os
+import json
 
 class Behavior_manager:
     """ Base class to manage the behavior of the objects loaded in the environment
@@ -44,7 +45,7 @@ class Behavior_manager:
         :param interaction_output_name: Name of the interaction that is use to send the response to the action.
         :return: None
         """
-        # First we create to interaction objects, one for the input the other for the output
+        # First we create two interaction objects, one for the input the other for the output
         interaction_input_obj = Interaction(self.bbdd)
         interaction_input_obj.set_interaction(interaction_input_name)
         interaction_output_obj = Interaction(self.bbdd)
@@ -68,6 +69,60 @@ class Behavior_manager:
         file_list = os.listdir(input_rel_path)
         # We search for the files configured
         file_ext = interaction_input_obj.get_commext()
-        for file in file_list:
-            if file_ext in file:
-                print("Bingo")
+        for file in file_list: # We search the files in the directory
+            if file_ext in file: # We read the file if the extension matches
+                this_path = os.path.join(input_rel_path,file)
+                input_file = open(this_path) # Open the file
+                for line in input_file.readlines(): # Read line by line
+                    ########################################################
+                    ## We retrieve the object in the form of a dictionary ##
+                    ########################################################
+                    line_dict = json.loads(line) # Transform the string into a dictionary
+                    this_obj_name = interaction_input_obj.get_objname() # Name of the object
+                    this_obj_source = interaction_input_obj.get_objsource()  # Name of the object
+                    obj_id_dict = line_dict[this_obj_name] # Obtain the id of the object
+                    obj_doc = self.bbdd.recover_one_doc(this_obj_source, obj_id_dict) # Recover object from source
+                    #########################################################
+                    ## We recovered the action in the form of a dictionary ##
+                    #########################################################
+                    this_act_name = interaction_input_obj.get_actname()  # Name of the action
+                    act_name_dict = line_dict[this_act_name]  # Obtain the dictionary of the action
+                    #print(obj_doc, act_name_dict)
+                    ######################################################
+                    ## We call the function that evaluate the behaviour ##
+                    ######################################################
+                    self.behavior(obj_doc,act_name_dict)
+
+    def behavior(self, object_dict, action_dict):
+        """ This function will model the response for one action done to one object
+        :param object_dict: Dictionary containing de object caracteristics
+        :param action_dict: Dictionary containing the action to apply to the object
+        :return: 0 if none of de actions (platform, product) match the customer's tastes
+                 1 if the platform or the product match the customer's tastes
+                 2 if the platform and the product match the customer's tastes
+        """
+        # First thing is separate the action into his elements (harcode for now)
+        this_product = action_dict[ConfEnvManager.action_elemen_1]
+        this_platform = action_dict[ConfEnvManager.action_elemen_2]
+        # Test the first action element
+        response1 = self.product_behavior(object_dict, this_product)
+        # Test the second action element
+        response2 = self.platform_behavior(object_dict, this_platform)
+
+    def product_behavior(self, object_dict, action_elemnt_dict):
+        """ This function will model the response for one action done to one object
+        :param object_dict: Dictionary containing de object caracteristics
+        :param action_elemnt_dict: Dictionary containing the action element to apply to the object
+        :return: 0 if the product doesn't match the customer's tastes
+                 1 if the product matches the customer's tastes
+        """
+        print(object_dict,action_elemnt_dict)
+
+    def platform_behavior(self, object_dict, action_elemnt_dict):
+        """ This function will model the response for one action done to one object
+        :param object_dict: Dictionary containing de object caracteristics
+        :param action_elemnt_dict: Dictionary containing the action element to apply to the object
+        :return: 0 if the platform doesn't match the customer's tastes
+                 1 if the platform matches the customer's tastes
+        """
+        print(object_dict,action_elemnt_dict)

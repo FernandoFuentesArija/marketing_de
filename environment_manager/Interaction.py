@@ -102,6 +102,8 @@ class Interaction:
                     self.input_int_obj_name = int_doc[ConfEnvManager.input_int_obj_name]
                 elif key == ConfEnvManager.input_int_obj_id:
                     self.input_int_obj_id = int_doc[ConfEnvManager.input_int_obj_id]
+                elif key == ConfEnvManager.input_int_obj_source:
+                    self.input_int_obj_source = int_doc[ConfEnvManager.input_int_obj_source]
                 elif key == ConfEnvManager.input_int_act_name:
                     self.input_int_act_name = int_doc[ConfEnvManager.input_int_act_name]
                 elif key == ConfEnvManager.input_int_inter_capacity:
@@ -142,3 +144,27 @@ class Interaction:
         :return: self.int_comm_ext
         """
         return self.int_comm_ext
+
+    def get_objname(self):
+        """ This function return the object name of the interaction.
+        :return: self.input_int_obj_name
+        """
+        return self.input_int_obj_name
+
+    def get_objid(self):
+        """ This function return the object id of the interaction.
+        :return: self.input_int_obj_id
+        """
+        return self.input_int_obj_id
+
+    def get_objsource(self):
+        """ This function return the object source of the interaction.
+        :return: self.input_int_obj_source
+        """
+        return self.input_int_obj_source
+
+    def get_actname(self):
+        """ This function return the action name of the interaction.
+        :return: self.input_int_act_name
+        """
+        return self.input_int_act_name
