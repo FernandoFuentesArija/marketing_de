@@ -28,3 +28,17 @@ file_comm = "FILE"
 ###########################
 action_elemen_1 = "PRODUCT"
 action_elemen_2 = "PLATFORM"
+
+###########################
+##    Person variables   ##
+###########################
+person_born_date = "BORN_DATE"
+
+###########################
+##  Platform variables   ##
+###########################
+plat_name = "PLATFORM_NAME"
+plat_radio = "RADIO"
+plat_tv = "TV"
+plat_newspaper = "NEWSPAPER"
+plat_social_networks = "SOCIAL_NETWORKS"

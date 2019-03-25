@@ -2,6 +2,7 @@ from environment_manager.Interaction import Interaction
 from environment_manager.config import ConfEnvManager
 import os
 import json
+import datetime
 
 class Behavior_manager:
     """ Base class to manage the behavior of the objects loaded in the environment
@@ -108,6 +109,7 @@ class Behavior_manager:
         response1 = self.product_behavior(object_dict, this_product)
         # Test the second action element
         response2 = self.platform_behavior(object_dict, this_platform)
+        # Return
 
     def product_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
@@ -116,7 +118,7 @@ class Behavior_manager:
         :return: 0 if the product doesn't match the customer's tastes
                  1 if the product matches the customer's tastes
         """
-        print(object_dict,action_elemnt_dict)
+        #print(object_dict,action_elemnt_dict)
 
     def platform_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
@@ -125,4 +127,28 @@ class Behavior_manager:
         :return: 0 if the platform doesn't match the customer's tastes
                  1 if the platform matches the customer's tastes
         """
-        print(object_dict,action_elemnt_dict)
+        # First we obtain the born date of the person
+        this_born_date = object_dict[ConfEnvManager.person_born_date]
+        # Now we obtain the platform taste for the person
+        # RADIO
+        if datetime.datetime(1960, 1, 1, 0, 0) <= this_born_date < datetime.datetime(1970, 1, 1, 0, 0):
+            this_person_platform_taste = ConfEnvManager.plat_radio
+        # TV
+        elif datetime.datetime(1970, 1, 1, 0, 0) <= this_born_date < datetime.datetime(1980, 1, 1, 0, 0):
+            this_person_platform_taste = ConfEnvManager.plat_tv
+        # NEWS PAPER
+        elif datetime.datetime(1980, 1, 1, 0, 0) <= this_born_date < datetime.datetime(1990, 1, 1, 0, 0):
+            this_person_platform_taste = ConfEnvManager.plat_newspaper
+        # SOCIAL NETWORKS
+        elif datetime.datetime(1990, 1, 1, 0, 0) <= this_born_date <= datetime.datetime(2000, 12, 31, 0, 0):
+            this_person_platform_taste = ConfEnvManager.plat_social_networks
+        else:
+            print("Error")
+        # Now we obtain the platform selected in the action
+        action_platform = action_elemnt_dict[ConfEnvManager.plat_name]
+        # Only if the platform selected in the action matches the taste of the person we return 1
+        if action_platform == this_person_platform_taste:
+            return 1
+        else:
+            return 0
+
