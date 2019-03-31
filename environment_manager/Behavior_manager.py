@@ -40,6 +40,7 @@ class Behavior_manager:
         """
         self.bbdd = ddbb_conn
 
+
     def action_behavior_manager(self, interaction_input_name, interaction_output_name):
         """ This function will model the response of the environment to actions
         :param interaction_input_name: Name of the interaction that is use to receive the action.
@@ -58,12 +59,22 @@ class Behavior_manager:
         else: # Configure more types in the future
             pass
 
+
     def file_action_behavior_manager(self, interaction_input_obj, interaction_output_obj):
         """ This function will model the response of the environment to actions
         :param interaction_input_obj: Object of the interaction that is use to receive the action.
         :param interaction_output_obj: Object of the interaction that is use to send the response to the action.
         :return: None
         """
+        # First we prepare de output file
+        output_rel_path = interaction_output_obj.get_path()
+        output_file_name = interaction_output_obj.get_intname()
+        output_file_ext = interaction_input_obj.get_commext()
+        output_file_name_plusext = output_file_name + '.' + output_file_ext
+        this_path = os.path.join(output_rel_path, output_file_name_plusext)
+        output_file = open(this_path,"w") # Destroy old file, create new one
+        output_file.close()
+        output_file = open(this_path, "a")  # Reopen to append
         # We ask for the relative path
         input_rel_path = interaction_input_obj.get_path()
         # Obtain list of files in input directory
@@ -89,10 +100,21 @@ class Behavior_manager:
                     this_act_name = interaction_input_obj.get_actname()  # Name of the action
                     act_name_dict = line_dict[this_act_name]  # Obtain the dictionary of the action
                     #print(obj_doc, act_name_dict)
-                    ######################################################
-                    ## We call the function that evaluate the behaviour ##
-                    ######################################################
-                    self.behavior(obj_doc,act_name_dict)
+                    ###########################################################################
+                    ## We call the function that evaluate the behaviour and prepare response ##
+                    ###########################################################################
+                    response = self.behavior(obj_doc,act_name_dict)
+                    if response == 2: # Good
+                        good_dic = {ConfEnvManager.response_id:10}
+                        obj_id_dict.update(good_dic)
+                    else: # Bad
+                        bad_dic = {ConfEnvManager.response_id: 0}
+                        obj_id_dict.update(bad_dic)
+                    str_response = str(obj_id_dict) + '\n'
+                    output_file.write(str_response)
+                input_file.close()
+        output_file.close()
+
 
     def behavior(self, object_dict, action_dict):
         """ This function will model the response for one action done to one object
@@ -110,8 +132,8 @@ class Behavior_manager:
         # Test the second action element
         response2 = self.platform_behavior(object_dict, this_platform)
         # Return
-        print("r1: ", response1)
-        print("r2: ", response2)
+        return response1 + response2
+
 
     def product_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
@@ -120,7 +142,7 @@ class Behavior_manager:
         :return: 0 if the product doesn't match the customer's tastes
                  1 if the product matches the customer's tastes
         """
-        print(object_dict,action_elemnt_dict)
+        # print(object_dict,action_elemnt_dict)
         # Now we obtain the product selected in the action
         action_product = action_elemnt_dict[ConfEnvManager.prod_name]
         # Depending on the product we search the customer atributtes that matches
@@ -239,7 +261,6 @@ class Behavior_manager:
             print("Product not recogniced")
 
 
-
     def platform_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
         :param object_dict: Dictionary containing de object caracteristics
@@ -271,4 +292,3 @@ class Behavior_manager:
             return 1
         else:
             return 0
-

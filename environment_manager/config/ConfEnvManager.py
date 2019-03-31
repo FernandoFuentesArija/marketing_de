@@ -30,6 +30,12 @@ action_elemen_1 = "PRODUCT"
 action_elemen_2 = "PLATFORM"
 
 ###########################
+##   Response variables  ##
+###########################
+response_id = "EXPENSE"
+
+
+###########################
 ##    Person variables   ##
 ###########################
 person_born_date = "BORN_DATE"

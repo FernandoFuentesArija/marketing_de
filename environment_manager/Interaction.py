@@ -168,3 +168,9 @@ class Interaction:
         :return: self.input_int_act_name
         """
         return self.input_int_act_name
+
+    def get_intname(self):
+        """ This function return the name of the interaction.
+        :return: self.int_name
+        """
+        return self.int_name

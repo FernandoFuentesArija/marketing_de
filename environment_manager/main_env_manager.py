@@ -11,4 +11,3 @@ int1.set_interaction("SEND_CAMPAIGN")
 #print(int1)
 bm1 = Behavior_manager(bbdd_connec)
 bm1.action_behavior_manager("SEND_CAMPAIGN","RECEIVE_EXPENSES")
-
