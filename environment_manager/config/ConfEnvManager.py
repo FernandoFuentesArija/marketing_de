@@ -33,6 +33,11 @@ action_elemen_2 = "PLATFORM"
 ##    Person variables   ##
 ###########################
 person_born_date = "BORN_DATE"
+person_city = "CITY"
+person_gender = "GENDER"
+person_weight = "WEIGHT"
+person_height = "HEIGHT"
+person_acc_bal = "ACCOUNT_BALANCE"
 
 ###########################
 ##  Platform variables   ##
@@ -42,3 +47,37 @@ plat_radio = "RADIO"
 plat_tv = "TV"
 plat_newspaper = "NEWSPAPER"
 plat_social_networks = "SOCIAL_NETWORKS"
+
+##########################
+##  Product variables   ##
+##########################
+prod_name = "PRODUCT_NAME"
+prod_price = "PRICE"
+prod_par = "PARAGUAS"
+prod_ban = "BANADOR"
+prod_bik = "BIKINI"
+prod_gim = "GIMNASIO"
+prod_die = "DIETISTA"
+prod_bal = "BALON_BALONCESTO"
+prod_des = "DESCAPOTABLE"
+prod_fut = "BALON_FUTBOL"
+prod_por = "PORSCHE"
+
+###########################
+##    Cities variables   ##
+###########################
+per_city_san = "Santiago"
+per_city_ovi = "Oviedo"
+per_city_der = "Santander"
+per_city_sal = "Salamanca"
+per_city_seg = "Segovia"
+per_city_mad = "Madrid"
+per_city_cad = "Cadiz"
+per_city_mar = "Marbella"
+per_city_mal = "Malaga"
+
+###########################
+##    gender variables   ##
+###########################
+per_male = "male"
+per_female= "female"

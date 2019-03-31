@@ -110,6 +110,8 @@ class Behavior_manager:
         # Test the second action element
         response2 = self.platform_behavior(object_dict, this_platform)
         # Return
+        print("r1: ", response1)
+        print("r2: ", response2)
 
     def product_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
@@ -118,7 +120,125 @@ class Behavior_manager:
         :return: 0 if the product doesn't match the customer's tastes
                  1 if the product matches the customer's tastes
         """
-        #print(object_dict,action_elemnt_dict)
+        print(object_dict,action_elemnt_dict)
+        # Now we obtain the product selected in the action
+        action_product = action_elemnt_dict[ConfEnvManager.prod_name]
+        # Depending on the product we search the customer atributtes that matches
+        # PARAGUAS
+        if (action_product == ConfEnvManager.prod_par):
+            # We obtain the city where the person is living
+            this_city = object_dict[ConfEnvManager.person_city]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_san,ConfEnvManager.per_city_ovi,ConfEnvManager.per_city_der]
+            # Validate if we match the taste
+            if this_city in this_cities:
+                return 1
+            else:
+                return 0
+        # BANADOR
+        elif (action_product == ConfEnvManager.prod_ban):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_gender = object_dict[ConfEnvManager.person_gender]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_cad, ConfEnvManager.per_city_mar, ConfEnvManager.per_city_mal]
+            # Validate if we match the taste
+            if this_city in this_cities and this_gender == ConfEnvManager.per_male:
+                return 1
+            else:
+                return 0
+        # BIKINI
+        elif (action_product == ConfEnvManager.prod_bik):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_gender = object_dict[ConfEnvManager.person_gender]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_cad, ConfEnvManager.per_city_mar, ConfEnvManager.per_city_mal]
+            # Validate if we match the taste
+            if this_city in this_cities and this_gender == ConfEnvManager.per_female:
+                return 1
+            else:
+                return 0
+        # GIMNASIO
+        elif (action_product == ConfEnvManager.prod_gim):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_weight = object_dict[ConfEnvManager.person_weight]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_sal, ConfEnvManager.per_city_seg]
+            # Validate if we match the taste
+            if this_city in this_cities and this_weight < 90:
+                return 1
+            else:
+                return 0
+        # DIETISTA
+        elif (action_product == ConfEnvManager.prod_die):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_weight = object_dict[ConfEnvManager.person_weight]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_sal, ConfEnvManager.per_city_seg]
+            # Validate if we match the taste
+            if this_city in this_cities and this_weight >= 90:
+                return 1
+            else:
+                return 0
+        # BALON_BALONCESTO
+        elif (action_product == ConfEnvManager.prod_bal):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_height = object_dict[ConfEnvManager.person_height]
+            this_acc_bal = object_dict[ConfEnvManager.person_acc_bal]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_mad]
+            # Validate if we match the taste
+            if this_city in this_cities and this_height >= 190 and this_acc_bal < 90000:
+                return 1
+            else:
+                return 0
+        # DESCAPOTABLE
+        elif (action_product == ConfEnvManager.prod_des):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_height = object_dict[ConfEnvManager.person_height]
+            this_acc_bal = object_dict[ConfEnvManager.person_acc_bal]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_mad]
+            # Validate if we match the taste
+            if this_city in this_cities and this_height >= 190 and this_acc_bal >= 90000:
+                return 1
+            else:
+                return 0
+        # BALON_FUTBOL
+        elif (action_product == ConfEnvManager.prod_fut):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_height = object_dict[ConfEnvManager.person_height]
+            this_acc_bal = object_dict[ConfEnvManager.person_acc_bal]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_mad]
+            # Validate if we match the taste
+            if this_city in this_cities and this_height < 190 and this_acc_bal < 90000:
+                return 1
+            else:
+                return 0
+        # PORSCHE
+        elif (action_product == ConfEnvManager.prod_por):
+            # We obtain the city and the gender
+            this_city = object_dict[ConfEnvManager.person_city]
+            this_height = object_dict[ConfEnvManager.person_height]
+            this_acc_bal = object_dict[ConfEnvManager.person_acc_bal]
+            # List of allowed cities
+            this_cities = [ConfEnvManager.per_city_mad]
+            # Validate if we match the taste
+            if this_city in this_cities and this_height < 190 and this_acc_bal >= 90000:
+                return 1
+            else:
+                return 0
+        else:
+            print("Product not recogniced")
+
+
 
     def platform_behavior(self, object_dict, action_elemnt_dict):
         """ This function will model the response for one action done to one object
