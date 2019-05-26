@@ -38,7 +38,7 @@ class Object_generator:
         self.bbdd = ddbb_conn
 
     def create_json_with_objects(self, object_name, how_many_objects):
-        """ This function will create and return a list of random texts made of only letters
+        """ This function will create and return a list objects
         :param object_name: Name of the object to create
         :param how_many_objects: Number of objects to create
         :return: list of objects generated in a json file
