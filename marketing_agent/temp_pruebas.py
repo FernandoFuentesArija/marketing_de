@@ -1,5 +1,8 @@
 import pandas as pd
 import random
+import os
+import subprocess
+from environment_manager import main_env_manager
 
 action_list = ["action1","action2","action3","action4","action5"]
 cont = 1
@@ -29,5 +32,13 @@ for elemnt in my_list1:
     a = elemnt
     my_list2.append(a)
 print(my_list2)
+
+#dir_actual = os.getcwd()
+#ruta_rel = "../environment_manager/main_env_manager.py"
+#ruta_good = os.path.join(dir_actual,ruta_rel)
+#os.system(ruta_good)
+#process1 = subprocess.Popen(['python', "../environment_manager/main_env_manager.py"])
+#retcode = subprocess.call(["../environment_manager/main_env_manager.py"])
+main_env_manager.run()
 
 

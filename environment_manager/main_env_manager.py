@@ -5,9 +5,8 @@ from environment_manager.Behavior_manager import Behavior_manager
 
 # Creamos una conexion a la BBDD
 bbdd_connec = Mongo_manager(ConfigVariablesBbdd.env_database)
-# Ejemplo de uso interaction
-int1 = Interaction(bbdd_connec)
-int1.set_interaction("SEND_CAMPAIGN")
-# Ejemplo de uso behaviour
 bm1 = Behavior_manager(bbdd_connec)
-bm1.action_behavior_manager("SEND_CAMPAIGN","RECEIVE_EXPENSES")
+# Ejemplo de uso behaviour
+def run():
+    bm1.action_behavior_manager("SEND_CAMPAIGN","RECEIVE_EXPENSES")
+#run()

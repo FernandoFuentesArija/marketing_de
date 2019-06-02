@@ -81,9 +81,14 @@ class Agent_orchestrator:
             # We put him in the list of ids
             list_id_obj_agents.append(agent_id_env)
             break
-        # We ask to every agent to select an action
+        # We ask to every agent to select an action and save it in the input environment manager
+        f = open(ConfigEnvMarkAgent.in_path_file_name, "w") # Open input file (delete content)
         for one_agent in list_obj_agents:
-            print(one_agent.select_action())
+            # We write in the input file the actions choosed by the agents
+            f.write(one_agent.select_action())
+        f.close() # Close input file
+        # We ask the environment manager to process the input actions
+
 
 
 
