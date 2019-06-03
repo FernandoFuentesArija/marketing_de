@@ -66,24 +66,29 @@ class Behavior_manager:
         :param interaction_output_obj: Object of the interaction that is use to send the response to the action.
         :return: None
         """
+        # We obtain the absolute path to this file
+        this_abs_path = os.path.abspath(os.path.dirname(__file__))
         # First we prepare de output file
         output_rel_path = interaction_output_obj.get_path()
         output_file_name = interaction_output_obj.get_intname()
         output_file_ext = interaction_input_obj.get_commext()
         output_file_name_plusext = output_file_name + '.' + output_file_ext
-        this_path = os.path.join(output_rel_path, output_file_name_plusext)
+        this_path = os.path.join(output_rel_path, output_file_name_plusext) # Relative path
+        this_path = os.path.join(this_abs_path, this_path) # Absolute path
         output_file = open(this_path,"w") # Destroy old file, create new one
         output_file.close()
         output_file = open(this_path, "a")  # Reopen to append
         # We ask for the relative path
-        input_rel_path = interaction_input_obj.get_path()
+        input_rel_path = interaction_input_obj.get_path() # Relative path
+        abs_input_rel_path = os.path.join(this_abs_path, input_rel_path) # Absolute path
         # Obtain list of files in input directory
-        file_list = os.listdir(input_rel_path)
+        file_list = os.listdir(abs_input_rel_path)
         # We search for the files configured
         file_ext = interaction_input_obj.get_commext()
         for file in file_list: # We search the files in the directory
             if file_ext in file: # We read the file if the extension matches
-                this_path = os.path.join(input_rel_path,file)
+                this_path = os.path.join(input_rel_path,file) # Relative path
+                this_path = os.path.join(this_abs_path, this_path) # Absolute path
                 input_file = open(this_path) # Open the file
                 for line in input_file.readlines(): # Read line by line
                     ########################################################

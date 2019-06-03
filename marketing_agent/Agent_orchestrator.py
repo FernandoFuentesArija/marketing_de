@@ -1,5 +1,6 @@
 from marketing_agent.config import ConfigEnvMarkAgent
 from marketing_agent.N_bandit_agent import N_bandit_agent
+from environment_manager import main_env_manager
 
 
 class Agent_orchestrator:
@@ -88,6 +89,7 @@ class Agent_orchestrator:
             f.write(one_agent.select_action())
         f.close() # Close input file
         # We ask the environment manager to process the input actions
+        main_env_manager.run()
 
 
 

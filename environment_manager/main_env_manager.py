@@ -9,4 +9,4 @@ bm1 = Behavior_manager(bbdd_connec)
 # Ejemplo de uso behaviour
 def run():
     bm1.action_behavior_manager("SEND_CAMPAIGN","RECEIVE_EXPENSES")
-#run()
+#run() # For local test
