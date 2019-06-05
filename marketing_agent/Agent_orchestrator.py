@@ -1,6 +1,7 @@
 from marketing_agent.config import ConfigEnvMarkAgent
 from marketing_agent.N_bandit_agent import N_bandit_agent
 from environment_manager import main_env_manager
+import json
 
 
 class Agent_orchestrator:
@@ -64,8 +65,10 @@ class Agent_orchestrator:
         :param iterations: Number of actions done for each agent to the environment
         :return total_reguard_list: Returns a list with the total reward by iteraction
         """
-        # Counter for iterations
-        iter_cont = 1
+        # list with the sum of rewards of each iteration
+        list_iter_rewards = []
+        # sum of rewards of each iteration
+        sum_iter_rewards = 0
         # List to contain al agents created
         list_obj_agents = []
         list_id_obj_agents = []
@@ -82,14 +85,37 @@ class Agent_orchestrator:
             # We put him in the list of ids
             list_id_obj_agents.append(agent_id_env)
             break
-        # We ask to every agent to select an action and save it in the input environment manager
-        f = open(ConfigEnvMarkAgent.in_path_file_name, "w") # Open input file (delete content)
-        for one_agent in list_obj_agents:
-            # We write in the input file the actions choosed by the agents
-            f.write(one_agent.select_action())
-        f.close() # Close input file
-        # We ask the environment manager to process the input actions
-        main_env_manager.run()
+        for iteration in range(iterations):
+            # At the begining of each iteration we initialize the counter
+            sum_iter_rewards = 0
+            # We ask to every agent to select an action and save it in the input environment manager
+            f = open(ConfigEnvMarkAgent.in_path_file_name, "w") # Open input file (delete content)
+            for one_agent in list_obj_agents:
+                # We write in the input file the actions choosed by the agents
+                f.write(one_agent.select_action())
+            f.close() # Close input file
+            # We ask the environment manager to process the input actions
+            main_env_manager.run()
+            # Once the environment has react to the actions we have to comunicate the answers to the agents
+            response_file = open(ConfigEnvMarkAgent.out_path_file_name) # Apertura fichero de respuestas
+            for response_str in response_file:
+                # We transform the string into a dictionary
+                response_str = response_str.replace("'","\"")
+                response_dict = json.loads(response_str)  # Transform the string into a dictionary
+                this_id = response_dict[ConfigEnvMarkAgent.obj_id] # Obtain the person id
+                this_reguard = response_dict[ConfigEnvMarkAgent.reward_id] # Obtain the reward of last action
+                # Save the sum of reguards for this iteration
+                sum_iter_rewards = sum_iter_rewards + this_reguard
+                # We search the agent
+                this_index = list_id_obj_agents.index(this_id)
+                # We give it the reward
+                list_obj_agents[this_index].receive_feedback(this_reguard)
+            response_file.close() # Cierre fichero de respuestas
+            # Before new iteration save total sum
+            list_iter_rewards.append(sum_iter_rewards)
+        return list_iter_rewards
+
+
 
 
 

@@ -6,39 +6,49 @@ from environment_manager import main_env_manager
 
 action_list = ["action1","action2","action3","action4","action5"]
 cont = 1
-Qk_list = []
-k_list = []
-alpha_list = []
-id_list = []
+Qk_list = [5,8,8,3,6]
+k_list = [1,1,1,1,1]
+alpha_list = [0,0,0,0,0]
+id_list = [1,2,3,4,5]
 
-for i in range(len(action_list)):
-    Qk_list.append(random.randint(0,10))
-    k_list.append(1)
-    alpha_list.append(0)
-    id_list.append(cont)
-    cont = cont + 1
 
 action_df = pd.DataFrame({"action":action_list,
                           "Qk":Qk_list,
                           "k":k_list,
                           "alpha":alpha_list},
                          index=id_list)
+print(action_df )
+print('----------------')
 
-print(action_df)
+# We obtain the max prediction of reward Qk
+Qk_max = action_df['Qk'].max()
+# We search in the df if we have more than one max
+filter_action_df = action_df[action_df.Qk == Qk_max]
+print(filter_action_df)
+print('----------------')
+original_index = filter_action_df.index
+print(original_index)
+print('----------------')
+# We reset the index of the new df
+filter_action_df_res = filter_action_df.reset_index(drop=True)
+print(filter_action_df_res)
+print('----------------')
+new_index = filter_action_df_res.index
+print(new_index)
+print('----------------')
+# We generate a random index to select only one row
+new_sel_id = random.randint(0, len(filter_action_df_res) - 1)
+print('Sel new index: ' + str(new_sel_id))
+old_sel_id = original_index[new_sel_id]
+print('Sel orig index: ' + str(old_sel_id))
+# We select the row
+#max_row = filter_action_df_res.loc[sel_id, :]
 
-my_list1 = ['primero','segundo','tercero']
-my_list2 = []
-for elemnt in my_list1:
-    a = elemnt
-    my_list2.append(a)
-print(my_list2)
+#action_df.at[4,'Qk']=20
+#print(action_df)
 
-#dir_actual = os.getcwd()
-#ruta_rel = "../environment_manager/main_env_manager.py"
-#ruta_good = os.path.join(dir_actual,ruta_rel)
-#os.system(ruta_good)
-#process1 = subprocess.Popen(['python', "../environment_manager/main_env_manager.py"])
-#retcode = subprocess.call(["../environment_manager/main_env_manager.py"])
-main_env_manager.run()
+
+
+
 
 

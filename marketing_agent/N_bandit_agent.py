@@ -95,6 +95,8 @@ class N_bandit_agent:
             self.error_sum = 0
             # We select a random action id
             sel_id = random.randint(1, len(self.this_n_actions))
+            # We save the selected ID
+            self.selected_id = sel_id
             # Now we select a random action
             random_row = self.action_df.loc[sel_id, :]
             self.action_str, self.Qk, self.k, self.alpha = random_row
@@ -104,17 +106,32 @@ class N_bandit_agent:
             Qk_max = self.action_df['Qk'].max()
             # We search in the df if we have more than one max
             filter_action_df = self.action_df[self.action_df.Qk == Qk_max]
+            original_index = filter_action_df.index
             # We reset the index of the new df
             filter_action_df_res = filter_action_df.reset_index(drop=True)
+            new_index = filter_action_df_res.index
             # We generate a random index to select only one row
             sel_id = random.randint(0, len(filter_action_df_res) - 1)
+            # We save a reference of the index selected
+            self.selected_id = original_index[sel_id]
             # We select the row
             max_row = filter_action_df_res.loc[sel_id, :]
             # We obtain the values for the action
             self.action_str, self.Qk, self.k, self.alpha = max_row
         return self.action_id_part + self.action_str
 
+    def receive_feedback(self, reward):
+        """ Method for communicating to the agent the reward received for his last action
 
+        :param reward:
+        :return:
+        """
+        # We calculate the mean reward for the action and upgrade de step
+        self.k_next = self.k + 1
+        self.Qk_next = self.Qk + (1/self.k_next)*(reward-self.Qk)
+        # We update the action matrix
+        self.action_df.at[self.selected_id, 'Qk'] = self.Qk_next
+        self.action_df.at[self.selected_id, 'k'] = self.k_next
 
 
 
