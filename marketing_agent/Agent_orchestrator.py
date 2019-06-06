@@ -40,6 +40,7 @@ class Agent_orchestrator:
         """
         self.bbdd = ddbb_conn
         self.error_for_agents = 0.05
+        self.initial_estimate = 0
         self.total_reguard_list = []
         self.list_of_actions = self.get_list_of_actions()
 
@@ -60,7 +61,7 @@ class Agent_orchestrator:
         act_conf_file.close()
         return list_of_act
 
-    def run(self, iterations, number_of_agents, agent_error = 0.05):
+    def run(self, iterations, number_of_agents, agent_error = 0.05, init_est = 0):
         """ This method will prepare as many agents as objects in the environment and manage all the comunications
         between them.
         :param iterations: Number of actions done for each agent to the environment
@@ -68,6 +69,7 @@ class Agent_orchestrator:
         """
         # We update the error to explore
         self.error_for_agents = agent_error
+        self.initial_estimate = init_est
         # list with the sum of rewards of each iteration
         list_iter_rewards = []
         # Count for the number of agents
@@ -84,7 +86,7 @@ class Agent_orchestrator:
             if number_of_agents == cont_num_of_ag:
                 break
             # We created the agent and put him on the list
-            agent = N_bandit_agent(self.bbdd,obj,self.list_of_actions,self.error_for_agents)
+            agent = N_bandit_agent(self.bbdd,obj,self.list_of_actions,self.error_for_agents,self.initial_estimate)
             # We put him on the list of agents
             list_obj_agents.append(agent)
             # We get the id of the agent's environment

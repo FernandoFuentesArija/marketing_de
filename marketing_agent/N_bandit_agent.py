@@ -31,7 +31,7 @@ class N_bandit_agent:
     """
 
     # We pass a connection to each instance (can be the same)
-    def __init__(self, ddbb_conn, environment, n_actions, error):
+    def __init__(self, ddbb_conn, environment, n_actions, error, initial_est = 0):
         """ For every instance we need 1 parameter
         :param ddbb_conn: Object that represents the connection to the bbdd
         """
@@ -50,7 +50,7 @@ class N_bandit_agent:
         id_list = []
         # - Create rest of columns
         for i in range(len(n_actions)):
-            Qk_list.append(0)
+            Qk_list.append(initial_est)
             k_list.append(1)
             alpha_list.append(0)
             id_list.append(cont)
