@@ -84,7 +84,6 @@ class Agent_orchestrator:
             agent_id_env = agent.return_id_obj()
             # We put him in the list of ids
             list_id_obj_agents.append(agent_id_env)
-            break
         for iteration in range(iterations):
             # At the begining of each iteration we initialize the counter
             sum_iter_rewards = 0
@@ -92,7 +91,9 @@ class Agent_orchestrator:
             f = open(ConfigEnvMarkAgent.in_path_file_name, "w") # Open input file (delete content)
             for one_agent in list_obj_agents:
                 # We write in the input file the actions choosed by the agents
-                f.write(one_agent.select_action())
+                #f.write(one_agent.select_action())
+                reg_escribir = one_agent.select_action()
+                f.write(reg_escribir)
             f.close() # Close input file
             # We ask the environment manager to process the input actions
             main_env_manager.run()
