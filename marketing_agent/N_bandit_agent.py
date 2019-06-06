@@ -40,7 +40,7 @@ class N_bandit_agent:
         self.this_env = environment
         self.this_n_actions = n_actions
         self.this_error = error
-        self.error_sum = 0 # Acumulated error
+        self.error_sum = random.random() # Random acumulated error between 0 and 1
         # Create dataframe with the actions and her information
         # - Variables used
         cont = 1

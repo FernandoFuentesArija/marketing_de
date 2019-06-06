@@ -2,6 +2,7 @@ from marketing_agent.config import ConfigEnvMarkAgent
 from marketing_agent.N_bandit_agent import N_bandit_agent
 from environment_manager import main_env_manager
 import json
+import datetime
 
 
 class Agent_orchestrator:
@@ -32,13 +33,13 @@ class Agent_orchestrator:
     """
 
     # We pass a connection to each instance (can be the same)
-    def __init__(self, ddbb_conn, agent_error = 0.05):
+    def __init__(self, ddbb_conn):
         """ For every instance we need at least 1 parameter the conection
         :param ddbb_conn: Object that represents the connection to the bbdd
         :param agent_error: Number that represents the error (random action)
         """
         self.bbdd = ddbb_conn
-        self.error_for_agents = agent_error
+        self.error_for_agents = 0.05
         self.total_reguard_list = []
         self.list_of_actions = self.get_list_of_actions()
 
@@ -59,23 +60,29 @@ class Agent_orchestrator:
         act_conf_file.close()
         return list_of_act
 
-    def run(self, iterations):
+    def run(self, iterations, number_of_agents, agent_error = 0.05):
         """ This method will prepare as many agents as objects in the environment and manage all the comunications
         between them.
         :param iterations: Number of actions done for each agent to the environment
         :return total_reguard_list: Returns a list with the total reward by iteraction
         """
+        # We update the error to explore
+        self.error_for_agents = agent_error
         # list with the sum of rewards of each iteration
         list_iter_rewards = []
-        # sum of rewards of each iteration
-        sum_iter_rewards = 0
+        # Count for the number of agents
+        cont_num_of_ag = 0
         # List to contain al agents created
         list_obj_agents = []
         list_id_obj_agents = []
         # We recover all objects in the environment
         all_env_objs = self.bbdd.recover_all_doc(ConfigEnvMarkAgent.env_source)
+        print("Init list of agents: " + str(datetime.datetime.now()))
         # We prepare a list of agents for each object in the environment
         for obj in all_env_objs:
+            # We stop if we reach the max number of agents
+            if number_of_agents == cont_num_of_ag:
+                break
             # We created the agent and put him on the list
             agent = N_bandit_agent(self.bbdd,obj,self.list_of_actions,self.error_for_agents)
             # We put him on the list of agents
@@ -84,7 +91,13 @@ class Agent_orchestrator:
             agent_id_env = agent.return_id_obj()
             # We put him in the list of ids
             list_id_obj_agents.append(agent_id_env)
+            # Count one more
+            cont_num_of_ag = cont_num_of_ag + 1
+
+        print("End list of agents: " + str(datetime.datetime.now()))
+        # Now for each iteration we generate actions comunicate them with the environment and receive the rewards
         for iteration in range(iterations):
+            print("Start iteration " + str(iteration + 1) + " : " + str(datetime.datetime.now()))
             # At the begining of each iteration we initialize the counter
             sum_iter_rewards = 0
             # We ask to every agent to select an action and save it in the input environment manager

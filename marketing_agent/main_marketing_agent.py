@@ -9,9 +9,14 @@ bbdd_connec = Mongo_manager(ConfigVariablesBbdd.env_database)
 
 # Creamos una accion
 test_orch = Agent_orchestrator(bbdd_connec)
-list_of_results = test_orch.run(100)
+# Iterations, number of agents, error
+list_of_results = test_orch.run(180,120,0.05)
 x_axis = range(len(list_of_results))
 plt.plot(list_of_results)
+list_of_results1 = test_orch.run(180,120,0.01)
+x_axis1 = range(len(list_of_results1))
+plt.plot(list_of_results1)
+
 show()
 
 

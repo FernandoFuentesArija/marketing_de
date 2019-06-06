@@ -3,7 +3,10 @@ import random
 import os
 import subprocess
 from environment_manager import main_env_manager
+import datetime
 
+
+print("Tiempo: " + str(datetime.datetime.now()))
 action_list = ["action1","action2","action3","action4","action5"]
 cont = 1
 Qk_list = [5,8,8,3,6]
@@ -46,6 +49,10 @@ print('Sel orig index: ' + str(old_sel_id))
 
 #action_df.at[4,'Qk']=20
 #print(action_df)
+print(datetime.datetime.now())
+
+print(random.random())
+
 
 
 
