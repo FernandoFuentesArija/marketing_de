@@ -1,2 +1,12 @@
-/usr/bin/mongoimport --db environmentBBDD --collection data_person_names --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/person_names.json
-/usr/bin/mongoimport --db environmentBBDD --collection data_person_surnames --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/person_surnames.json
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_names --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/data_person_names.json
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_surnames --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/data_person_surnames.json
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_gender --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/data_person_gender.json
+/usr/bin/mongoimport --db environmentBBDD --collection data_person_city --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/data_person_city.json
+/usr/bin/mongoimport --db environmentBBDD --collection conf_objects --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/conf_person_obj.json
+/usr/bin/mongoimport --db environmentBBDD --collection conf_env_interactions --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/conf_env_interactions.json
+/usr/bin/mongoimport --db environmentBBDD --collection conf_env_actions --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/conf_env_actions.json
+/usr/bin/mongoimport --db environmentBBDD --collection conf_env_action_elements --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/conf_env_action_elements.json
+/usr/bin/mongoimport --db environmentBBDD --collection env_person --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/env_person.json
+/usr/bin/mongoimport --db environmentBBDD --collection env_products --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/env_products.json
+/usr/bin/mongoimport --db environmentBBDD --collection env_platforms --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/env_platforms.json
+/usr/bin/mongoimport --db environmentBBDD --collection test --drop --file /MasterDS/Proyecto/marketing_de/bbdd_manager/mongoImports/test.json
