@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560095185483.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3986744419",
+    "id" : "3204F421",
+    "lastKnownWriteTime" : 1560115421,
+    "last_content_update" : 1560115421690,
+    "path" : "~/shiny_marketing_de/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "cursorPosition" : "94,47",
+        "scrollLine" : "69",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

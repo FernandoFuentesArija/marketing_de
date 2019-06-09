@@ -1,0 +1,17 @@
+library(tidyverse)
+
+x_function <- 1:180
+y_function <- read.table(file="test_180_120_005_0.csv", sep = ",")
+y2_function <- read.table(file="test_180_120_001_0.csv", sep = ",")
+
+datos <- read.table(file="all_data.csv", sep = ",", header = TRUE)
+
+qplot(x_function,y_function$V1,geom="line",color='0.5')
+qplot(x_function,y2_function$V1,geom="line",color='0.1')
+
+qplot(iter,reward, data = datos,geom="line",color=case)
+
+require(gapminder)
+
+datos_sub=subset(gapminder,country %in% c("Spain","Greece","Poland"))
+
